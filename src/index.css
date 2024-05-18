@@ -2,7 +2,8 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
+  --primary-color: #ba68c8;
+  --neutral-color-secondary: #01000065;
 }
 
 *,
@@ -11,18 +12,51 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--neutral-color-secondary);
+}
+
+body {
+  background-color: #080d25;
+}
+
 figure {
   margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+figcaption {
+  text-align: center;
+}
+
+img{
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
 
 .img-container {
   img {
     border-radius: 9px;
     display: block;
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     transition: opacity 0.3s;
-    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    transition: all 300ms;
+    position: relative;
+  }
+  img:hover {
+    transform: scale(1.15);
   }
 }
