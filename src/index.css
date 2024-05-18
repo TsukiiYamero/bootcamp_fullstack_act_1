@@ -10,3 +10,19 @@
 *::after {
   box-sizing: border-box;
 }
+
+figure {
+  margin: 0;
+}
+
+.img-container {
+  img {
+    border-radius: 9px;
+    display: block;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    transition: opacity 0.3s;
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  }
+}
