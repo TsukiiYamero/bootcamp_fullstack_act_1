@@ -1,30 +1,23 @@
-# React + TypeScript + Vite
+# Bootcamp Web Fullstack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+¡Bienvenido al repositorio del Bootcamp Web Fullstack! Este repositorio contiene varias ramas, cada una correspondiente a una actividad diferente realizada durante el bootcamp. A continuación, se explica cómo cambiar de rama para ver el código y los archivos relacionados con cada actividad.
 
-Currently, two official plugins are available:
+## Índice de ramas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **main**: Rama principal con información general del bootcamp.
+- **actividad-1**: Creacion de una app en react
+- **gallery**: Actividad de Galeria
+- **actividad-3**:
+- **actividad-4**: 
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Cambiar de rama
 
-- Configure the top-level `parserOptions` property like this:
+Para cambiar de rama y ver el contenido de una actividad específica, sigue estos pasos:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### 1. Clonar el repositorio
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Si aún no has clonado el repositorio, clónalo usando el siguiente comando:
+
+```bash
+git clone https://github.com/tu-usuario/bootcamp-web-fullstack.git
