@@ -27,9 +27,16 @@
 
 body {
   background-color: #080d25;
+  color: #fff;
 }
 
 figure {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
