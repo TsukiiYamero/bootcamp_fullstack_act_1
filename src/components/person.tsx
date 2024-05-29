@@ -1,5 +1,5 @@
-export const Person = ({ name, role, img, id, handleEdit }:
-    { name: string, role: string, img: string, id: string, handleEdit: (id: string) => void }) => {
+export const Person = ({ name, role, img, id, handleEdit, handleDelete }:
+    { name: string, role: string, img: string, id: string, handleEdit: (id: string) => void, handleDelete: (id: string) => void }) => {
 
 
     return (
@@ -15,6 +15,9 @@ export const Person = ({ name, role, img, id, handleEdit }:
                         onClick={() => handleEdit(id)}
                         className="btn btn-success me-2">Editar</button>
                     <button
+                        data-bs-target="#idmodal"
+                        data-bs-toggle="modal"
+                        onClick={() => { handleDelete(id) }}
                         className="btn btn-danger">Eliminar</button>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import { Person } from './person';
 export const Persons = ({ persons, setPersons }: { persons: { id: string, name: string, role: string, img: string }[], setPersons: Dispatch<SetStateAction<{ id: string; name: string; role: string; img: string; }[]>> }) => {
     const [editId, setEditId] = useState<string>();
     const [isEditing, setIsEditing] = useState<boolean>();
+    const [personToDelete, setPersonToDelete] = useState<{ id: string, name: string, role: string, img: string }>();
     const [editedPerson, setEditedPerson] = useState({
         name: '',
         role: '',
@@ -32,6 +33,10 @@ export const Persons = ({ persons, setPersons }: { persons: { id: string, name: 
         setEditedPerson({ ...person });
     }
 
+    const handleDelete = (id: string) => {
+        setPersonToDelete(persons.find((person) => person.id === id))
+    }
+
     const handleSave = () => {
         setPersons(
             persons.map((person) => (person.id === editId ? editedPerson : person))
@@ -46,6 +51,26 @@ export const Persons = ({ persons, setPersons }: { persons: { id: string, name: 
         })
     }
 
+    const cancelDelete = () => {
+        setPersonToDelete(undefined);
+    }
+
+    const confirmDelete = () => {
+        if (!personToDelete) return;
+        const updatedPersons = persons.filter((person) => person.id !== personToDelete.id);
+        setPersons(updatedPersons);
+        cancelDelete();
+    }
+
+    const createPerson = () => {
+        setPersons([...persons, { ...editedPerson, id: (persons.length + 1).toString() }]);
+        setEditedPerson({
+            name: '',
+            role: '',
+            img: '',
+            id: "0"
+        })
+    }
 
     return (
         <div>
@@ -54,14 +79,14 @@ export const Persons = ({ persons, setPersons }: { persons: { id: string, name: 
             <ul className='container d-flex gap-3 flex-wrap'>
                 {
                     persons.map((person) =>
-                        <Person handleEdit={handdleEdit} key={person.id} {...person} />
+                        <Person handleEdit={handdleEdit} handleDelete={handleDelete} key={person.id} {...person} />
                     )
 
                 }
             </ul>
 
             <section>
-                <h2 className=''>Modificar Datos</h2>
+                <h2 className=''>{isEditing ? 'Editar' : 'Agregar'}</h2>
 
                 <div className='d-flex gap-3 flex-column'>
                     <input name='name' value={editedPerson.name} onChange={handleChange} type="text" className="form-control" placeholder="name" aria-label="Username1" aria-describedby="basic-addon1" />
@@ -70,10 +95,38 @@ export const Persons = ({ persons, setPersons }: { persons: { id: string, name: 
                 </div>
 
                 <div className='mt-3'>
-                    <button onClick={handleSave} className='btn btn-success'>{isEditing ? 'Update' : 'Add'}</button>
+                    <button onClick={isEditing ? handleSave : createPerson} className='btn btn-success'>{isEditing ? 'Update' : 'Add'}</button>
                 </div>
 
             </section>
+
+
+            <div id='idmodal' className='modal fade' tabIndex={-1}>
+                <div className='modal-dialog'>
+                    <div className='modal-content'>
+                        <div className='modal-header'>
+                            <h3 className='modal-title text-danger-emphasis'>
+                                Profavor Confirma
+                            </h3>
+
+                            <button
+                                onClick={cancelDelete}
+                                className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                        </div>
+
+                        <div className='modal-body'>
+                            <p className='text-secondary'>¿Estas seguro de eliminar a {personToDelete?.name} </p>
+                        </div>
+
+                        <div className='modal-footer d-flex gap-3'>
+                            <button onClick={cancelDelete} className='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+
+                            <button onClick={confirmDelete} className='btn btn-secondary' data-bs-dismiss='modal'>Eliminar</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     )
