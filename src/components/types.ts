@@ -1,0 +1,1 @@
+export interface PersonType { id: string, name: string, role: string, img: string }
