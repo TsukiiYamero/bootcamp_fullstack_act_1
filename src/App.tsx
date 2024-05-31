@@ -2,11 +2,13 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { RandomUser } from './component/RandomUser'
+import { Beers } from './component/Beers'
 
 function App() {
 
   return (
-    <>
+    <div className='continer'>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -19,12 +21,17 @@ function App() {
 
       <h1>Hello World - Diego Bello 👋</h1>
 
-      <div className="card">
+      <div className='continer'>
+        <div>
+          <Beers />
+        </div>
+
+        <div className="">
+          <h2>Fetch</h2>
+          <RandomUser />
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
