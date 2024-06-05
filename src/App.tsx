@@ -2,6 +2,8 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { Counter } from './components/Counter'
+import { Users } from './components/Users'
 
 function App() {
 
@@ -16,14 +18,9 @@ function App() {
         </a>
       </div>
 
-
       <h1>Hello World - Diego Bello 👋</h1>
-
-      <div className="card">
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Counter />
+      <Users />
     </>
   )
 }
