@@ -6,15 +6,21 @@ import { Articles } from "../components/Articles";
 import { About } from "../components/About";
 import { routes } from "./routes.types";
 import { NotFound } from "../components/NotFound";
+import { useMyContext } from "../context/Context";
 
-const links = [
-    { name: "Contact", path: routes.contact },
-    { name: "Login", path: routes.login },
-    { name: "Articles", path: routes.articles },
-    { name: "About", path: routes.about },
-]
+import logo from "../assets/LOGOSTORE.png"
+
 
 export const AppRouter = () => {
+    const { user, setUser } = useMyContext();
+
+    const links = [
+        { name: "Contact", path: routes.contact },
+        { name: "Articles", path: routes.articles },
+        { name: "About", path: routes.about },
+        { name: "Login", path: routes.login },
+    ]
+
     return (
         <BrowserRouter>
             <header className="">
@@ -24,7 +30,9 @@ export const AppRouter = () => {
                             <button type="button" className="btn">
                                 <NavLink to={routes.home}
                                     className={({ isActive }) => isActive ? "active" : ""}
-                                >Home</NavLink>
+                                >
+                                    <img style={{ width: "60px", height: "60px", objectFit: "contain" }} src={logo} alt="" />
+                                </NavLink>
                             </button>
                         </li>
                     </div>
@@ -33,11 +41,41 @@ export const AppRouter = () => {
                         {
                             links.map((link) => (
                                 <li key={link.path}>
-                                    <NavLink to={link.path}
-                                        className={({ isActive }) => isActive ? "item-active" : ""}
-                                    >
-                                        {link.name}
-                                    </NavLink>
+                                    {
+                                        link.name === "Login"
+                                            ? (<div>
+                                                {
+                                                    user?.name ?
+                                                        <>
+                                                            <NavLink to={link.path}
+                                                                className={({ isActive }) => isActive ? "item-active" : ""}
+                                                            >
+                                                                {user?.name}
+                                                            </NavLink>
+                                                            <p onClick={() => setUser({
+                                                                name: "",
+                                                                id: "",
+                                                                city: "",
+                                                                phone: "",
+                                                                lastName: ""
+                                                            })} style={{ cursor: "pointer", color: "red" }}>
+                                                                Logout
+                                                            </p>
+                                                        </>
+                                                        : <NavLink to={link.path}
+                                                            className={({ isActive }) => isActive ? "item-active" : ""}
+                                                        >
+                                                            {link.name}
+                                                        </NavLink>
+                                                }
+
+                                            </div>)
+                                            : <NavLink to={link.path}
+                                                className={({ isActive }) => isActive ? "item-active" : ""}
+                                            >
+                                                {link.name}
+                                            </NavLink>
+                                    }
                                 </li>
                             ))
                         }
