@@ -5,18 +5,27 @@ import './App.css'
 import { AppRouter } from './routes/Routes'
 import { Context } from './context/Context'
 import { Client } from './types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function App() {
 
-  const [user, setUser] = useState<Client>({
-    name: "Diego",
-    id: "1",
-    city: "Medellin",
-    phone: "123456789",
-    lastName: "Hernandez"
-  });
+  const [user, setUser] = useState<Client>();
 
+
+  useEffect(() => {
+    if (!user) return
+
+    localStorage.setItem('user', JSON.stringify(user));
+  }, [user]);
+
+  useEffect(() => {
+    const JsonData = localStorage.getItem('user');
+    if (!JsonData) return;
+
+    const user = JSON.parse(JsonData);
+    console.log(user);
+    setUser(user);
+  }, []);
 
   return (
     <>
